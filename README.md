@@ -1,4 +1,4 @@
-# first
+# Vue.js learning
 
 > A Vue.js project
 
