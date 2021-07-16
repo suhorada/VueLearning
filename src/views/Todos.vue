@@ -40,9 +40,7 @@ export default {
     },
     addTodo (todo) { this.todos.push(todo) },
     load () {
-      setTimeout(() => {
-        this.loading = false
-      }, 10000)
+      this.loading = false
     }
   },
   mounted () {
