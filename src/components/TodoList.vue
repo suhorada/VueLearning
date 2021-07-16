@@ -5,11 +5,10 @@
         v-for="todo of allTodos"
         v-bind:todo="todo"
         v-bind:key="todo.id"
-        v-on:todoDelete="todoDelete"
       />
+        <!-- v-on:todoDelete="todoDelete" -->
       {{allTodos}}
     </ul>
-    <button v-on:click="log">test</button>
   </div>
 </template>
 
@@ -23,13 +22,9 @@ export default {
     TodoItem
   },
   methods: {
-    todoDelete (id) {
-      this.$emit('todoDelete', id)
-    },
-    log () {
-      this.$store.dispatch('addTodo', {todo: {id: 1, text: 228, completed: false}, listName: 'list1'})
-      // console.log(this.allTodos)
-    }
+    // todoDelete (id) {
+    //   this.$emit('todoDelete', id)
+    // }
   },
   computed: {
     ...mapGetters(['allTodos'])

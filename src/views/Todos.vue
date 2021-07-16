@@ -38,7 +38,10 @@ export default {
     todoDelete (id) {
       this.todos = this.todos.filter((el) => el.id !== id)
     },
-    addTodo (todo) { this.todos.push(todo) },
+    addTodo (todo) {
+      // this.todos.push(todo)
+      this.$store.dispatch('addTodo', {todo: {id: 1, text: 228, completed: false}, listName: 'list1'})
+    },
     load () {
       this.loading = false
     }

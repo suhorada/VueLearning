@@ -14,9 +14,12 @@ export default {
     onSubmit () {
       if (this.text.trim()) {
         const newTodo = {id: Date.now(), text: this.text, completed: false}
-        this.$emit('addTodo', newTodo)
+        this.addTodo(newTodo)
         this.text = ''
       }
+    },
+    addTodo (todo) {
+      this.$store.dispatch('addTodo', {todo, listName: 'list1'})
     }
   }
 }
