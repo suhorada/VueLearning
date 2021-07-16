@@ -2,11 +2,12 @@
   <div>
     <ul>
       <TodoItem
-        v-for="todo of todos"
+        v-for="todo of allTodos"
         v-bind:todo="todo"
         v-bind:key="todo.id"
         v-on:todoDelete="todoDelete"
       />
+      {{allTodos}}
     </ul>
     <button v-on:click="log">test</button>
   </div>

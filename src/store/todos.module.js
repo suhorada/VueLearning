@@ -1,36 +1,29 @@
 import { setLS } from '../localStorage'
 import { ADD_TODO } from './actionst.type'
 
-// state = {
-//   todos: {
-//     listName:
-//       [
-//         {
-//           id: number,
-//           text: string,
-//           completed: bool
-//         }
-//       ]
-//     }
-//   ]
-// }
 export const state = {
-  todos: {/* list1: */}
+  todos: []
 }
 
 export const actions = {
   addTodo (context, todo) {
-    // console.log('ct-------------------', context)
     context.commit(ADD_TODO, todo)
   }
 }
 
 export const mutations = {
   [ADD_TODO] (state, todo) {
-    // console.log('todo==============', todo)
-    if (state.todos[todo.listName]) {
-      state.todos[todo.listName].push(todo.todo)
-    } else state.todos[todo.listName] = [todo.todo]
+    // if (state.todos[todo.listName]) {
+    //   state.todos[todo.listName].push(todo.todo)
+    // } else {
+    //   state.todos[todo.listName] = [todo.todo]
+    // }
+    // setLS('todos', state.todos)
+    if (state.todos) {
+      state.todos.push(todo.todo)
+    } else {
+      state.todos = [todo.todo]
+    }
     setLS('todos', state.todos)
   }
 }
