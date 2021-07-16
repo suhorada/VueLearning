@@ -1,5 +1,5 @@
 {
-  "name": "first",
+  "name": "vue",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "Semyon Suhorada <s.suhorada@dunice.net>",
@@ -13,6 +13,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@vue/composition-api": "^1.0.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
