@@ -22,18 +22,20 @@ export default {
   },
   methods: {
     onChange (e) {
-      console.log(e.target.value)
     }
   },
   computed: {
     ...mapGetters(['allLists'])
   },
   mounted () {
-    console.log(this.allLists)
   }
 }
 </script>
 
 <style scoped>
-
+  select {
+    height: 35px;
+    width: 170px;
+    font-size: 1.2rem;
+  }
 </style>

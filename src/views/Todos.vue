@@ -3,15 +3,15 @@
         <h2>Todo list component</h2>
         <router-link to="/">Home</router-link>
         <hr>
-        <SelectList/>
-        <AddTodo @addTodo="addTodo"/>
+        <div class="add-bar">
+          <SelectList/>
+          <AddTodo @addTodo="addTodo"/>
+        </div>
         <hr>
         <Loader v-if="loading"/>
         <TodoList
             v-else-if="allTodos.length"
         />
-            <!-- @todoDelete="todoDelete" -->
-            <!-- v-bind:todos="todos" -->
         <p v-else>No todods</p>
     </div>
 </template>
@@ -28,7 +28,6 @@ export default {
   data () {
     return {
       loading: true
-      // todos: this.$store.
     }
   },
   computed: {
@@ -56,3 +55,15 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .add-bar {
+    position: relative;
+    display: flex;
+    width: 500px;
+    justify-content: space-between;
+    align-items: center;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+</style>

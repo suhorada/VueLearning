@@ -6,7 +6,6 @@
         v-bind:todo="todo"
         v-bind:key="todo.id"
       />
-        <!-- v-on:todoDelete="todoDelete" -->
       {{allTodos}}
     </ul>
   </div>
@@ -22,9 +21,6 @@ export default {
     TodoItem
   },
   methods: {
-    // todoDelete (id) {
-    //   this.$emit('todoDelete', id)
-    // }
   },
   computed: {
     ...mapGetters(['allTodos'])

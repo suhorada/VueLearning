@@ -2,7 +2,8 @@ import { setLS } from '../localStorage'
 import { ADD_LIST } from './actionst.type'
 
 export const state = {
-  listNames: ['zxc', 'aues']
+  listNames: ['MyList1', 'TestList'],
+  selected: 'All'
 }
 
 export const actions = {
