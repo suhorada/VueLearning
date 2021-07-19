@@ -2,11 +2,11 @@ import { setLS } from '../localStorage'
 import { ADD_LIST } from './actionst.type'
 
 export const state = {
-  listNames: []
+  listNames: ['zxc', 'aues']
 }
 
 export const actions = {
-  addTodo (context, name) {
+  addList (context, name) {
     context.commit(ADD_LIST, name)
   }
 }

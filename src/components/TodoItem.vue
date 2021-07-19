@@ -3,7 +3,7 @@
         <span class="text-span" v-bind:class="{['completed-task']: todo.completed}">
             <input :checked="todo.completed" type="checkbox" v-on:change="todo.completed = !todo.completed, editTodo('check')">
             <label v-if="!edit">{{todo.text}}</label>
-            <input :value="todo.text" ref="editInput" v-if="edit" v-on:blur="edit=!edit, editTodo('text')" type="text">
+            <input v-on:keyup.enter="editTodo('text'), blurInput()" :value="todo.text" ref="editInput" v-if="edit" v-on:blur="edit=!edit, editTodo('text')" type="text">
         </span>
         <button class="remove-button" v-on:click="deleteTodo">Delete</button>
     </li>
@@ -33,9 +33,16 @@ export default {
     focusInput () {
       const self = this
       setTimeout(function () {
-        console.log(self.$refs)
         if (self.$refs) {
           self.$refs.editInput.focus()
+        }
+      }, 1)
+    },
+    blurInput () {
+      const self = this
+      setTimeout(function () {
+        if (self.$refs) {
+          self.$refs.editInput.blur()
         }
       }, 1)
     }

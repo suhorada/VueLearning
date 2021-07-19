@@ -6,13 +6,14 @@ import Vuex from 'vuex'
 // import article from './article.module'
 // import profile from './profile.module'
 import todos from '@/store/todos.module'
+import lists from '@/store/lists.module'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    todos
-    // auth,
+    todos,
+    lists
     // article,
     // profile
   }
