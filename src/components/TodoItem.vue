@@ -1,10 +1,11 @@
 <template>
-    <li class="align-center" v-bind:class="{['completed-task']: todo.completed}">
+    <li class="align-center" v-on:dblclick="editTodo, edit=!edit, focusInput()" v-bind:class="{['completed-task']: todo.completed}">
         <span class="text-span" v-bind:class="{['completed-task']: todo.completed}">
-            <input type="checkbox" v-on:change="todo.completed = !todo.completed">
-            Do: {{todo.text}}
+            <input :checked="todo.completed" type="checkbox" v-on:change="todo.completed = !todo.completed, editTodo('check')">
+            <label v-if="!edit">{{todo.text}}</label>
+            <input :value="todo.text" ref="editInput" v-if="edit" v-on:blur="edit=!edit, editTodo('text')" type="text">
         </span>
-        <button class="remove-button" v-on:click="$emit('todoDelete', todo.id)">Delete</button>
+        <button class="remove-button" v-on:click="deleteTodo">Delete</button>
     </li>
 </template>
 
@@ -14,6 +15,34 @@ export default {
     todo: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    deleteTodo () {
+      this.$store.dispatch('deleteTodo', this.todo.id)
+    },
+    editTodo (where) {
+      if (where === 'text') {
+        const newTodo = {...this.todo, text: this.$refs.editInput.value}
+        this.$store.dispatch('editTodo', newTodo)
+      } else if (where === 'check') {
+        const newTodo = {...this.todo}
+        this.$store.dispatch('editTodo', newTodo)
+      }
+    },
+    focusInput () {
+      const self = this
+      setTimeout(function () {
+        console.log(self.$refs)
+        if (self.$refs) {
+          self.$refs.editInput.focus()
+        }
+      }, 1)
+    }
+  },
+  data: function () {
+    return {
+      edit: false
     }
   },
   mounted () {
