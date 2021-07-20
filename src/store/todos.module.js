@@ -1,5 +1,5 @@
 import { getLS, setLS } from '../localStorage'
-import { ADD_TODO, DELETE_TODO, EDIT_TODO, LOAD_TODOS_LS } from './actionst.type'
+import { ADD_TODO, DELETE_TODO, EDIT_TODO, LOAD_TODOS_LS } from './mutations.type'
 
 export const state = {
   todos: []

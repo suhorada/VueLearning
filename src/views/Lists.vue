@@ -8,8 +8,8 @@
     <div class="add-bar">
       <SelectList/>
     </div>
-    <Lists/>
-    <p>No lists</p>
+    <Lists v-if="allLists.length"/>
+    <p v-else>No lists</p>
   </div>
 </template>
 
@@ -27,21 +27,15 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['allTodos'])
+    ...mapGetters(['allLists'])
   },
   components: {
     Loader, SelectList, Lists
   },
   methods: {
-    todoDelete (id) {
-      this.todos = this.todos.filter((el) => el.id !== id)
-    },
-    addTodo (todo) {
-      this.$store.dispatch('addTodo', {todo: {id: 1, text: 228, completed: false}, listName: 'list1'})
-    },
     load () {
-      if (getLS('todos')) {
-        this.$store.dispatch('getTodosFromLS')
+      if (getLS('lists')) {
+        this.$store.dispatch('getListsFromLS')
       }
       this.loading = false
     }

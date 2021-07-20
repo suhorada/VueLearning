@@ -66,12 +66,10 @@ export default {
     transition: 0.6s;
     font-size: 1.2rem;
     height: 35px;
-    margin-bottom: 10px;
   }
 
   .select-block {
     display: flex;
-    /* width: 255px; */
     justify-content: space-between;
     align-items: center;
   }

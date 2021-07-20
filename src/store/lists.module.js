@@ -1,5 +1,5 @@
 import { getLS, setLS } from '../localStorage'
-import { ADD_LIST, LOAD_LISTS_LS, SELECT_LIST } from './actionst.type'
+import { ADD_LIST, DELETE_LIST, EDIT_LIST, LOAD_LISTS_LS, SELECT_LIST } from './mutations.type'
 
 export const state = {
   listNames: ['MyList1', 'TestList'],
@@ -15,6 +15,12 @@ export const actions = {
   },
   getListsFromLS (context) {
     context.commit(LOAD_LISTS_LS)
+  },
+  deleteList (context, name) {
+    context.commit(DELETE_LIST, name)
+  },
+  editList (context, name, newName) {
+    context.commit(EDIT_LIST, name, newName)
   }
 }
 
@@ -43,6 +49,24 @@ export const mutations = {
     } else {
       state.listNames = []
     }
+  },
+  [EDIT_LIST] (state, name, newName) {
+    if (!state.listNames.some((el) => el === name)) {
+      if (state.listNames) {
+        state.listNames.map((el) => {
+          if (el === name) {
+            return newName
+          } else {
+            return el
+          }
+        })
+      }
+      setLS('lists', state.listNames)
+    }
+  },
+  [DELETE_LIST] (state, name) {
+    state.listNames = state.listNames.filter((el) => el !== name)
+    setLS('lists', state.listNames)
   }
 }
 

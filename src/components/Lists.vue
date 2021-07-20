@@ -25,7 +25,6 @@ export default {
     ...mapGetters(['allLists'])
   },
   mounted () {
-    console.log(this.allLists)
   }
 }
 </script>
@@ -35,5 +34,9 @@ export default {
     list-style: none;
     margin: 0;
     padding: 0;
+  }
+
+  div {
+    margin-top: 10px;
   }
 </style>
