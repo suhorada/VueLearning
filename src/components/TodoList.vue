@@ -6,7 +6,6 @@
         v-bind:todo="todo"
         v-bind:key="todo.id"
       />
-      {{allTodos}}
     </ul>
   </div>
 </template>

@@ -1,9 +1,9 @@
 <template>
     <li class="align-center" v-on:dblclick="editTodo, edit=!edit, focusInput()" v-bind:class="{['completed-task']: todo.completed}">
+      <div><input :checked="todo.completed" type="checkbox" v-on:change="todo.completed = !todo.completed, editTodo('check')"></div>
         <span class="text-span" v-bind:class="{['completed-task']: todo.completed}">
-            <input :checked="todo.completed" type="checkbox" v-on:change="todo.completed = !todo.completed, editTodo('check')">
-            <label v-if="!edit">{{todo.text}}</label>
-            <input v-on:keyup.enter="editTodo('text'), blurInput()" :value="todo.text" ref="editInput" v-if="edit" v-on:blur="edit=!edit, editTodo('text')" type="text">
+            <div><label class="todo-label" v-if="!edit">{{todo.text}}</label></div>
+            <input class="todo-input" v-on:keyup.enter="editTodo('text'), blurInput()" :value="todo.text" ref="editInput" v-if="edit" v-on:blur="edit=!edit, editTodo('text')" type="text">
         </span>
         <button class="remove-button" v-on:click="deleteTodo">Delete</button>
     </li>
@@ -60,6 +60,10 @@ export default {
 <style scoped>
     .text-span {
         font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        width: 70%;
+        margin-left: -75px;
     }
 
     li {
@@ -105,5 +109,21 @@ export default {
     .align-center {
         display: flex;
         align-items: center;
+    }
+
+    .todo-label {
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .todo-input {
+      width: 100%;
+      border-radius: 7px;
+      height: 25px;
+      font-size: 1.2rem;
+    }
+
+    .label-span {
+      width: 500px;
     }
 </style>
