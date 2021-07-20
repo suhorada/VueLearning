@@ -1,28 +1,30 @@
 <template>
   <div>
     <ul>
-      <TodoItem
-        v-for="todo of allTodos"
-        v-bind:todo="todo"
-        v-bind:key="todo.id"
+      <ListItem
+        v-for="list of allLists"
+        v-bind:list="list"
+        v-bind:key="list"
       />
     </ul>
   </div>
 </template>
 
 <script>
-import TodoItem from '@/components/TodoItem.vue'
+import ListItem from '@/components/lists/ListItem.vue'
 import { mapGetters } from 'vuex'
 
 export default {
   props: ['todos'],
   components: {
-    TodoItem
+    ListItem
   },
   methods: {
   },
   computed: {
-    ...mapGetters(['allTodos'])
+    ...mapGetters(['allLists'])
+  },
+  mounted () {
   }
 }
 </script>
@@ -32,5 +34,9 @@ export default {
     list-style: none;
     margin: 0;
     padding: 0;
+  }
+
+  div {
+    margin-top: 10px;
   }
 </style>

@@ -2,7 +2,7 @@
   <div class="select-block">
     <button @click="showModal()" class="add-list" type="submit">Add List</button>
     <select v-if="this.$route.path==='/todos'" name="List" id="list" @change="onChange($event)">
-      <option v-if="currentList==='All'" :value="null" selected>Select List</option>
+      <option :value="'All'" selected>Select List</option>
       <option
       v-for="list of allLists"
       v-bind:key="list"
@@ -18,7 +18,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import AddListModal from '@/components/AddListModal.vue'
+import AddListModal from '@/components/lists/AddListModal.vue'
 
 export default {
   data () {

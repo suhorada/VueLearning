@@ -6,20 +6,25 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   data () {
     return {text: ''}
   },
+  computed: {
+    ...mapGetters(['currentList'])
+  },
   methods: {
     onSubmit () {
       if (this.text.trim()) {
-        const newTodo = {id: Date.now(), text: this.text, completed: false}
+        const newTodo = {id: Date.now(), text: this.text, completed: false, listName: this.currentList}
         this.addTodo(newTodo)
         this.text = ''
       }
     },
     addTodo (todo) {
-      this.$store.dispatch('addTodo', {todo, listName: 'list1'})
+      this.$store.dispatch('addTodo', todo)
     }
   }
 }

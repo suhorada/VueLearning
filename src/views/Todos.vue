@@ -7,11 +7,12 @@
       <hr>
       <div class="add-bar">
         <SelectList/>
-        <AddTodo/>
+        <AddTodo v-if="currentList!=='All'"/>
       </div>
       <hr>
       <Loader v-if="loading"/>
       <TodoList
+          v-bind:list="currentList"
           v-else-if="allTodos.length"
       />
       <p v-else>No todods</p>
@@ -19,10 +20,10 @@
 </template>
 
 <script>
-import TodoList from '@/components/TodoList.vue'
-import AddTodo from '@/components/AddTodo.vue'
+import TodoList from '@/components/todos/TodoList.vue'
+import AddTodo from '@/components/todos/AddTodo.vue'
 import Loader from '@/components/Loader.vue'
-import SelectList from '@/components/SelectList.vue'
+import SelectList from '@/components/lists/SelectList.vue'
 import { mapGetters } from 'vuex'
 import { getLS } from '../localStorage'
 export default {
@@ -33,7 +34,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['allTodos'])
+    ...mapGetters(['allTodos', 'currentList'])
   },
   components: {
     TodoList, AddTodo, Loader, SelectList

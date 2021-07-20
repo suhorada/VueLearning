@@ -2,7 +2,10 @@
     <li class="align-center" v-on:dblclick="editTodo, edit=!edit, focusInput()" v-bind:class="{['completed-task']: todo.completed}">
       <div><input :checked="todo.completed" type="checkbox" v-on:change="todo.completed = !todo.completed, editTodo('check')"></div>
         <span class="text-span" v-bind:class="{['completed-task']: todo.completed}">
-            <div><label class="todo-label" v-if="!edit">{{todo.text}}</label></div>
+            <div>
+              <span>{{`[${todo.listName}]`}}</span>
+              <label class="todo-label" v-if="!edit">{{todo.text}}</label>
+            </div>
             <input class="todo-input" v-on:keyup.enter="editTodo('text'), blurInput()" :value="todo.text" ref="editInput" v-if="edit" v-on:blur="edit=!edit, editTodo('text')" type="text">
         </span>
         <button class="remove-button" v-on:click="deleteTodo">Delete</button>
@@ -117,7 +120,7 @@ export default {
     }
 
     .todo-input {
-      width: 100%;
+      width: 80%;
       border-radius: 7px;
       height: 25px;
       font-size: 1.2rem;

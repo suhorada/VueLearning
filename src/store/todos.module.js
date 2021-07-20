@@ -23,9 +23,9 @@ export const actions = {
 export const mutations = {
   [ADD_TODO] (state, todo) {
     if (state.todos) {
-      state.todos.push(todo.todo)
+      state.todos.push(todo)
     } else {
-      state.todos = [todo.todo]
+      state.todos = [todo]
     }
     setLS('todos', state.todos)
   },
@@ -40,7 +40,6 @@ export const mutations = {
   [EDIT_TODO] (state, todo) {
     if (state.todos) {
       state.todos.find((el) => el.id === todo.id).text = todo.text
-      // state.todos = state.todos.filter((el) => el.id !== id)
     } else {
       state.todos = []
     }

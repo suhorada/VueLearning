@@ -15,8 +15,8 @@
 
 <script>
 import Loader from '@/components/Loader.vue'
-import SelectList from '@/components/SelectList.vue'
-import Lists from '@/components/Lists.vue'
+import SelectList from '@/components/lists/SelectList.vue'
+import Lists from '@/components/lists/Lists.vue'
 import { mapGetters } from 'vuex'
 import { getLS } from '../localStorage'
 export default {
