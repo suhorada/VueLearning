@@ -41,6 +41,7 @@ export default {
     ...mapGetters(['allLists', 'currentList'])
   },
   mounted () {
+    this.$store.dispatch('selectList', 'All')
   },
   components: {
     AddListModal
