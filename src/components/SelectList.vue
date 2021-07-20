@@ -1,6 +1,6 @@
 <template>
   <div class="select-block">
-    <button @click="addList()" class="add-list" type="submit">Add List</button>
+    <button @click="showModal()" class="add-list" type="submit">Add List</button>
       <select name="List" id="list" @change="onChange($event)">
         <option v-if="currentList==='All'" :value="null" selected>Select List</option>
         <option
@@ -10,26 +10,40 @@
         >{{list}}
         </option>
       </select>
+      <AddListModal
+        v-show="isModalVisible"
+        @close="closeModal"
+      />
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import AddListModal from '@/components/AddListModal.vue'
 
 export default {
   data () {
     return {
-
+      isModalVisible: false
     }
   },
   methods: {
     onChange (e) {
       this.$store.dispatch('selectList', e.target.value)
+    },
+    showModal () {
+      this.isModalVisible = true
+    },
+    closeModal () {
+      this.isModalVisible = false
     }
   },
   computed: {
     ...mapGetters(['allLists', 'currentList'])
   },
   mounted () {
+  },
+  components: {
+    AddListModal
   }
 }
 </script>

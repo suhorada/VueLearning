@@ -47,13 +47,11 @@ export const mutations = {
     setLS('todos', state.todos)
   },
   [LOAD_TODOS_LS] (state) {
-    if (state.todos) {
+    if (getLS('todos')) {
       state.todos = getLS('todos')
-      // state.todos = state.todos.filter((el) => el.id !== id)
     } else {
       state.todos = []
     }
-    // setLS('todos', state.todos)
   }
 }
 

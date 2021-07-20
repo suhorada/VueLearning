@@ -1,5 +1,5 @@
-import { setLS } from '../localStorage'
-import { ADD_LIST, SELECT_LIST } from './actionst.type'
+import { getLS, setLS } from '../localStorage'
+import { ADD_LIST, LOAD_LISTS_LS, SELECT_LIST } from './actionst.type'
 
 export const state = {
   listNames: ['MyList1', 'TestList'],
@@ -12,6 +12,9 @@ export const actions = {
   },
   selectList (context, name) {
     context.commit(SELECT_LIST, name)
+  },
+  getListsFromLS (context) {
+    context.commit(LOAD_LISTS_LS)
   }
 }
 
@@ -33,6 +36,13 @@ export const mutations = {
       state.selected = 'All'
     }
     setLS('lists', state.listNames)
+  },
+  [LOAD_LISTS_LS] (state) {
+    if (getLS('lists')) {
+      state.listNames = getLS('lists')
+    } else {
+      state.listNames = []
+    }
   }
 }
 
