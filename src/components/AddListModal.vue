@@ -50,8 +50,8 @@ export default {
     },
     onSubmit () {
       if (this.text.trim()) {
-        console.log(this)
         this.addList(this.text.trim())
+        this.text = ''
       }
     },
     addList (name) {

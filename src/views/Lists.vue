@@ -1,28 +1,22 @@
 <template>
   <div>
-      <h2>Todo list component</h2>
-      <router-link to="/">Home</router-link>
-      <router-link to="/todos">Todos</router-link>
-      <router-link to="/lists">Lists</router-link>
-      <hr>
-      <div class="add-bar">
-        <SelectList/>
-        <AddTodo/>
-      </div>
-      <hr>
-      <Loader v-if="loading"/>
-      <TodoList
-          v-else-if="allTodos.length"
-      />
-      <p v-else>No todods</p>
+    <h2>Todo list component</h2>
+    <router-link to="/">Home</router-link>
+    <router-link to="/todos">Todos</router-link>
+    <router-link to="/lists">Lists</router-link>
+    <hr>
+    <div class="add-bar">
+      <SelectList/>
+    </div>
+    <Lists/>
+    <p>No lists</p>
   </div>
 </template>
 
 <script>
-import TodoList from '@/components/TodoList.vue'
-import AddTodo from '@/components/AddTodo.vue'
 import Loader from '@/components/Loader.vue'
 import SelectList from '@/components/SelectList.vue'
+import Lists from '@/components/Lists.vue'
 import { mapGetters } from 'vuex'
 import { getLS } from '../localStorage'
 export default {
@@ -36,11 +30,14 @@ export default {
     ...mapGetters(['allTodos'])
   },
   components: {
-    TodoList, AddTodo, Loader, SelectList
+    Loader, SelectList, Lists
   },
   methods: {
     todoDelete (id) {
       this.todos = this.todos.filter((el) => el.id !== id)
+    },
+    addTodo (todo) {
+      this.$store.dispatch('addTodo', {todo: {id: 1, text: 228, completed: false}, listName: 'list1'})
     },
     load () {
       if (getLS('todos')) {
@@ -60,7 +57,7 @@ export default {
     position: relative;
     display: flex;
     width: 600px;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     left: 50%;
     transform: translate(-50%, 0);
