@@ -20,13 +20,10 @@ export default {
     deleteList () {
       this.$store.dispatch('deleteList', this.list)
     },
-    editList (where) {
-      if (where === 'text') {
-        const newList = {...this.list, text: this.$refs.editInput.value}
-        this.$store.dispatch('editList', newList)
-      } else if (where === 'check') {
-        const newList = {...this.list}
-        this.$store.dispatch('editList', newList)
+    editList () {
+      if (this.$refs.editInput.value.trim()) {
+        const newList = this.$refs.editInput.value.trim()
+        this.$store.dispatch('editList', {lastList: this.list, newList})
       }
     },
     focusInput () {

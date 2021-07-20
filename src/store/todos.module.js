@@ -1,5 +1,5 @@
 import { getLS, setLS } from '../localStorage'
-import { ADD_TODO, DELETE_TODO, DELETE_TODOS_IN_LIST, EDIT_TODO, LOAD_TODOS_LS } from './mutations.type'
+import { ADD_TODO, DELETE_TODO, DELETE_TODOS_IN_LIST, EDIT_TODO, EDIT_TODOS_LIST, LOAD_TODOS_LS } from './mutations.type'
 
 export const state = {
   todos: []
@@ -48,6 +48,15 @@ export const mutations = {
   [EDIT_TODO] (state, todo) {
     if (state.todos) {
       state.todos.find((el) => el.id === todo.id).text = todo.text
+    } else {
+      state.todos = []
+    }
+    setLS('todos', state.todos)
+  },
+  [EDIT_TODOS_LIST] (state, list, newList) {
+    if (state.todos) {
+      // console.log(state.todos.find((el) => el.listName === list))
+      // state.todos.find((el) => el.listName === list).listName = newList
     } else {
       state.todos = []
     }

@@ -1,8 +1,8 @@
 import { getLS, setLS } from '../localStorage'
-import { ADD_LIST, DELETE_LIST, DELETE_TODOS_IN_LIST, EDIT_LIST, LOAD_LISTS_LS, SELECT_LIST } from './mutations.type'
+import { ADD_LIST, DELETE_LIST, DELETE_TODOS_IN_LIST, EDIT_LIST, EDIT_TODOS_LIST, LOAD_LISTS_LS, SELECT_LIST } from './mutations.type'
 
 export const state = {
-  listNames: ['MyList1', 'TestList'],
+  listNames: [],
   selected: 'All'
 }
 
@@ -20,8 +20,9 @@ export const actions = {
     context.commit(DELETE_LIST, name)
     context.commit(DELETE_TODOS_IN_LIST, name)
   },
-  editList (context, name, newName) {
-    context.commit(EDIT_LIST, name, newName)
+  editList (context, list) {
+    context.commit(EDIT_LIST, list.lastList, list.newList)
+    context.commit(EDIT_TODOS_LIST, list.lastList, list.newList)
   }
 }
 
