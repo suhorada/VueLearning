@@ -1,14 +1,15 @@
 <template>
-    <li class="align-center" v-on:dblclick="editList, edit=!edit, focusInput()">
+    <li class="align-center" @click="setList" v-on:dblclick="editList, edit=!edit, focusInput()">
       <span class="text-span">
-          <div><label class="list-label" v-if="!edit">{{list}}</label></div>
-          <input class="list-input" v-on:keyup.enter="editList('text'), blurInput()" :value="list" ref="editInput" v-if="edit" v-on:blur="edit=!edit, editList('text')" type="text">
+          <div><label class="list-label" v-if="!edit"><router-link class="link" to="/todos">{{list}}</router-link></label></div>
+          <input class="list-input" v-on:keyup.enter="blurInput()" :value="list" ref="editInput" v-if="edit" v-on:blur="edit=!edit, editList('text')" type="text">
       </span>
       <button class="remove-button" v-on:click="deleteList">Delete</button>
     </li>
 </template>
 
 <script>
+import { setLS } from '../../localStorage'
 export default {
   props: {
     list: {
@@ -41,6 +42,9 @@ export default {
           self.$refs.editInput.blur()
         }
       }, 1)
+    },
+    setList () {
+      setLS('currentList', this.list)
     }
   },
   data: function () {
@@ -54,71 +58,90 @@ export default {
 </script>
 
 <style scoped>
-    .text-span {
-        font-size: 1.2rem;
-        display: flex;
-        align-items: center;
-        width: 70%;
-    }
+  .link {
+    font-size: 1.2rem;
+    text-decoration-line: none;
+  }
 
-    li {
-        border: 1px solid #ccc;
-        display: flex;
-        justify-content: space-between;
-        padding: .5rem .2rem;
-        margin-bottom: 1rem;
-        border-radius: 7px;
-    }
+  .link:visited {
+    color: black;
+  }
 
-    .remove-button {
-        background-color: rgba(255, 0, 0, 0.479);
-        color: #fff;
-        border: 0px;
-        border-radius: 7px;
-        margin-right: 1rem;
-        transition: 0.3s;
-        font-size: 1.2rem;
-        height: 35px;
-        width: 110px;
-    }
-    .remove-button:hover {
-        background-color:red;
-        transform:scale(1.051,1.051);
-        -webkit-transform:scale(1.051,1.051);
-        -moz-transform:scale(1.051,1.051);
-        transition: 0.3s;
-    }
+  .link:hover {
+    cursor: pointer;
+    text-decoration-line: initial;
+    color: rgb(45, 86, 163);
+  }
 
-    span.completed-task {
-        text-decoration: line-through;
-    }
+  .text-span {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    width: 70%;
+  }
 
-    li.completed-task {
-        background-color: rgba(0, 179, 0, 0.075);
-    }
+  li {
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem .2rem;
+    margin-bottom: 1rem;
+    border-radius: 7px;
+  }
 
-    input {
-        margin-right: 1rem;
-    }
+  /* li:hover {
+    box-shadow: #ccc 5px;
+  } */
 
-    .align-center {
-        display: flex;
-        align-items: center;
-    }
+  .remove-button {
+    background-color: rgba(255, 0, 0, 0.479);
+    color: #fff;
+    border: 0px;
+    border-radius: 7px;
+    margin-right: 1rem;
+    transition: 0.3s;
+    font-size: 1.2rem;
+    height: 35px;
+    width: 110px;
+  }
+  .remove-button:hover {
+    background-color:red;
+    transform:scale(1.051,1.051);
+    -webkit-transform:scale(1.051,1.051);
+    -moz-transform:scale(1.051,1.051);
+    transition: 0.3s;
+  }
 
-    .list-label {
-      white-space: pre-wrap;
-      word-break: break-all;
-    }
+  span.completed-task {
+    text-decoration: line-through;
+  }
 
-    .list-input {
-      width: 100%;
-      border-radius: 7px;
-      height: 25px;
-      font-size: 1.2rem;
-    }
+  li.completed-task {
+    background-color: rgba(0, 179, 0, 0.075);
+  }
 
-    .label-span {
-      width: 500px;
-    }
+  input {
+    margin-right: 1rem;
+  }
+
+  .align-center {
+    display: flex;
+    align-items: center;
+  }
+
+  .list-label {
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  .list-input {
+    width: 100%;
+    border-radius: 7px;
+    height: 25px;
+    font-size: 1.2rem;
+  }
+
+  .label-span {
+    width: 500px;
+  }
 </style>

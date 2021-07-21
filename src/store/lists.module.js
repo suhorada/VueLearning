@@ -21,8 +21,8 @@ export const actions = {
     context.commit(DELETE_TODOS_IN_LIST, name)
   },
   editList (context, list) {
-    context.commit(EDIT_LIST, list.lastList, list.newList)
-    context.commit(EDIT_TODOS_LIST, list.lastList, list.newList)
+    context.commit(EDIT_LIST, list)
+    context.commit(EDIT_TODOS_LIST, list)
   }
 }
 
@@ -52,17 +52,15 @@ export const mutations = {
       state.listNames = []
     }
   },
-  [EDIT_LIST] (state, name, newName) {
-    if (!state.listNames.some((el) => el === name)) {
-      if (state.listNames) {
-        state.listNames.map((el) => {
-          if (el === name) {
-            return newName
-          } else {
-            return el
-          }
-        })
-      }
+  [EDIT_LIST] (state, list) {
+    if (state.listNames.some((el) => el === list.lastList)) {
+      state.listNames = state.listNames.map((el) => {
+        if (el === list.lastList) {
+          return list.newList
+        } else {
+          return el
+        }
+      })
       setLS('lists', state.listNames)
     }
   },

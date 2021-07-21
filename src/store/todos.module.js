@@ -53,10 +53,14 @@ export const mutations = {
     }
     setLS('todos', state.todos)
   },
-  [EDIT_TODOS_LIST] (state, list, newList) {
+  [EDIT_TODOS_LIST] (state, list) {
     if (state.todos) {
-      // console.log(state.todos.find((el) => el.listName === list))
-      // state.todos.find((el) => el.listName === list).listName = newList
+      state.todos.map((el) => {
+        if (el.listName === list.lastList) {
+          el.listName = list.newList
+        }
+        return el.listName
+      })
     } else {
       state.todos = []
     }
@@ -73,6 +77,7 @@ export const mutations = {
 
 export const getters = {
   allTodos () {
+    state.todos.sort((el) => el.completed ? 1 : -1)
     return state.todos
   }
 }
