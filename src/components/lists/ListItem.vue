@@ -1,7 +1,7 @@
 <template>
-    <li class="align-center" @click="setList" v-on:dblclick="editList, edit=!edit, focusInput()">
+    <li class="align-center" v-on:dblclick="editList, edit=!edit, focusInput()">
       <span class="text-span">
-          <div><label class="list-label" v-if="!edit"><router-link class="link" to="/todos">{{list}}</router-link></label></div>
+          <div><label @click="setList" class="list-label" v-if="!edit"><router-link class="link" to="/todos">{{list}}</router-link></label></div>
           <input class="list-input" v-on:keyup.enter="blurInput()" :value="list" ref="editInput" v-if="edit" v-on:blur="edit=!edit, editList('text')" type="text">
       </span>
       <button class="remove-button" v-on:click="deleteList">Delete</button>

@@ -21,7 +21,10 @@ export default {
     TodoItem
   },
   methods: {
-    getCurrentList () {
+    getCurrentList() {
+      // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       setTimeout(() => {
         const current = getLS('currentList')
         if (current) this.$store.dispatch('selectList', current)
@@ -31,25 +34,24 @@ export default {
   },
   computed: {
     ...mapGetters(['allTodos', 'currentList']),
-    filteredItems () {
+    filteredItems() {
       // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       this.getCurrentList()
       if (this.currentList !== 'All') {
-        return this.allTodos.filter((todo) => todo.listName === this.currentList)
+        return this.allTodos.filter(todo => todo.listName === this.currentList)
       } else {
         return this.allTodos
       }
     }
   },
-  mounted () {
-  }
+  mounted() {}
 }
 </script>
 
 <style scoped>
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 </style>
