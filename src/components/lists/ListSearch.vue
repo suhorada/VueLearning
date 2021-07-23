@@ -6,14 +6,8 @@
 
 <script>
 export default {
-  data() {
-    return { text: '' }
-  },
-  methods: {
-    search() {
-      this.$store.dispatch('setListsSearch', this.text)
-    }
-  }
+  data() { return { text: '' } },
+  methods: { search() { this.$store.dispatch('setListsSearch', this.text) } }
 }
 </script>
 

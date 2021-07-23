@@ -1,32 +1,41 @@
 <template>
-    <li class="align-center" v-on:dblclick="editList, edit=!edit, focusInput()">
-      <span class="text-span">
-          <div><label @click="setList" class="list-label" v-if="!edit"><router-link class="link" to="/todos">{{list}}</router-link></label></div>
-          <input class="list-input" v-on:keyup.enter="blurInput()" :value="list" ref="editInput" v-if="edit" v-on:blur="edit=!edit, editList('text')" type="text">
-      </span>
-      <button class="remove-button" v-on:click="deleteList">Delete</button>
-    </li>
+  <li class="align-center" v-on:dblclick="editList, edit=!edit, focusInput()">
+    <span class="text-span">
+        <div>
+          <label @click="setList" class="list-label" v-if="!edit">
+            <router-link class="link" to="/todos">
+              {{list}}
+            </router-link>
+          </label>
+        </div>
+        <input class="list-input" v-on:keyup.enter="blurInput()" :value="list" ref="editInput" v-if="edit" v-on:blur="edit=!edit, editList('text')" type="text">
+    </span>
+    <button class="remove-button" v-on:click="deleteList">Delete</button>
+  </li>
 </template>
 
 <script>
 import { setLS } from '../../localStorage'
+
 export default {
+  data () { return { edit: false } },
   props: {
     list: {
       type: String,
       required: true
     }
   },
+
   methods: {
-    deleteList () {
-      this.$store.dispatch('deleteList', this.list)
-    },
+    deleteList () { this.$store.dispatch('deleteList', this.list) },
+    setList () { setLS('currentList', this.list) },
     editList () {
       if (this.$refs.editInput.value.trim()) {
         const newList = this.$refs.editInput.value.trim()
         this.$store.dispatch('editList', {lastList: this.list, newList})
       }
     },
+
     focusInput () {
       const self = this
       setTimeout(function () {
@@ -35,6 +44,7 @@ export default {
         }
       }, 1)
     },
+
     blurInput () {
       const self = this
       setTimeout(function () {
@@ -42,17 +52,7 @@ export default {
           self.$refs.editInput.blur()
         }
       }, 1)
-    },
-    setList () {
-      setLS('currentList', this.list)
     }
-  },
-  data: function () {
-    return {
-      edit: false
-    }
-  },
-  mounted () {
   }
 }
 </script>
@@ -89,10 +89,6 @@ export default {
     border-radius: 7px;
   }
 
-  /* li:hover {
-    box-shadow: #ccc 5px;
-  } */
-
   .remove-button {
     background-color: rgba(255, 0, 0, 0.479);
     color: #fff;
@@ -104,6 +100,7 @@ export default {
     height: 35px;
     width: 110px;
   }
+
   .remove-button:hover {
     background-color:red;
     transform:scale(1.051,1.051);

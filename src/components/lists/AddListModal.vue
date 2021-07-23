@@ -41,25 +41,19 @@
 <script>
 export default {
   name: 'modal',
-  data () {
-    return {text: ''}
-  },
+  data () { return {text: ''} },
+  mounted () { this.$store.dispatch('getListsFromLS') },
+
   methods: {
-    close () {
-      this.$emit('close')
-    },
+    addList (name) { this.$store.dispatch('addList', name) },
+    close () { this.$emit('close') },
+
     onSubmit () {
       if (this.text.trim()) {
         this.addList(this.text.trim())
         this.text = ''
       }
-    },
-    addList (name) {
-      this.$store.dispatch('addList', name)
     }
-  },
-  mounted () {
-    this.$store.dispatch('getListsFromLS')
   }
 }
 </script>
@@ -95,10 +89,6 @@ export default {
   }
 
   .modal {
-    /* position: absolute;
-    left: 50%;
-    right: 50%;
-    transform: translate(-50%, -50%); */
     width: 30vw;
     height: 30vh;
     background: #FFFFFF;

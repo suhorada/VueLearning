@@ -16,16 +16,8 @@ import { mapGetters } from 'vuex'
 
 export default {
   props: ['todos'],
-  components: {
-    ListItem
-  },
-  methods: {
-  },
-  computed: {
-    ...mapGetters(['allLists'])
-  },
-  mounted () {
-  }
+  components: { ListItem },
+  computed: { ...mapGetters(['allLists']) }
 }
 </script>
 
