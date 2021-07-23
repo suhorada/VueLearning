@@ -19,9 +19,7 @@ import { getLS, removeLS } from '../../localStorage'
 
 export default {
   props: ['todos'],
-  components: {
-    TodoItem, TodosSearch
-  },
+  components: { TodoItem, TodosSearch },
   methods: {
     getCurrentList() {
       // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -34,6 +32,7 @@ export default {
       }, 1)
     }
   },
+
   computed: {
     ...mapGetters(['allTodos', 'currentList']),
     filteredItems() {
@@ -45,15 +44,14 @@ export default {
         return this.allTodos
       }
     }
-  },
-  mounted() {}
+  }
 }
 </script>
 
 <style scoped>
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 </style>
