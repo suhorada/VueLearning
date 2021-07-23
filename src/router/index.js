@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/Home'
-// import Zxc from '@/components/Zxc.vue'
 
 Vue.use(Router)
 
