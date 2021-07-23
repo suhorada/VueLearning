@@ -8,25 +8,18 @@ export const state = {
 }
 
 export const actions = {
-  addList (context, name) {
-    context.commit(ADD_LIST, name)
-  },
-  selectList (context, name) {
-    context.commit(SELECT_LIST, name)
-  },
-  getListsFromLS (context) {
-    context.commit(LOAD_LISTS_LS)
-  },
+  setListsSearch (context, text) { context.commit(SET_LISTS_SEARCH, text) },
+  selectList (context, name) { context.commit(SELECT_LIST, name) },
+  getListsFromLS (context) { context.commit(LOAD_LISTS_LS) },
+  addList (context, name) { context.commit(ADD_LIST, name) },
   deleteList (context, name) {
     context.commit(DELETE_LIST, name)
     context.commit(DELETE_TODOS_IN_LIST, name)
   },
+
   editList (context, list) {
     context.commit(EDIT_LIST, list)
     context.commit(EDIT_TODOS_LIST, list)
-  },
-  setListsSearch (context, text) {
-    context.commit(SET_LISTS_SEARCH, text)
   }
 }
 
@@ -41,6 +34,7 @@ export const mutations = {
       setLS('lists', state.listNames)
     }
   },
+
   [SELECT_LIST] (state, name) {
     if (state.listNames.some((el) => el === name)) {
       state.selected = name
@@ -49,6 +43,7 @@ export const mutations = {
     }
     setLS('lists', state.listNames)
   },
+
   [LOAD_LISTS_LS] (state) {
     if (getLS('lists')) {
       state.listNames = getLS('lists')
@@ -56,6 +51,7 @@ export const mutations = {
       state.listNames = []
     }
   },
+
   [EDIT_LIST] (state, list) {
     if (state.listNames.some((el) => el === list.lastList)) {
       state.listNames = state.listNames.map((el) => {
@@ -68,13 +64,13 @@ export const mutations = {
       setLS('lists', state.listNames)
     }
   },
+
   [DELETE_LIST] (state, name) {
     state.listNames = state.listNames.filter((el) => el !== name)
     setLS('lists', state.listNames)
   },
-  [SET_LISTS_SEARCH] (state, text) {
-    state.listsSearch = text
-  }
+
+  [SET_LISTS_SEARCH] (state, text) { state.listsSearch = text }
 }
 
 export const getters = {
@@ -86,12 +82,9 @@ export const getters = {
     }
     return filtered
   },
-  currentList () {
-    return state.selected
-  },
-  listsSearch () {
-    return state.listsSearch
-  }
+
+  currentList () { return state.selected },
+  listsSearch () { return state.listsSearch }
 }
 
 export default {

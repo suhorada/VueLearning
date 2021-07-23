@@ -21,19 +21,12 @@ import ListSearch from '@/components/lists/ListSearch.vue'
 import Lists from '@/components/lists/Lists.vue'
 import { mapGetters } from 'vuex'
 import { getLS } from '../localStorage'
+
 export default {
   name: 'App',
-  data () {
-    return {
-      loading: true
-    }
-  },
-  computed: {
-    ...mapGetters(['allLists'])
-  },
-  components: {
-    Loader, SelectList, Lists, ListSearch
-  },
+  data () { return { loading: true } },
+  computed: { ...mapGetters(['allLists']) },
+  components: { Loader, SelectList, Lists, ListSearch },
   methods: {
     load () {
       if (getLS('lists')) {
@@ -42,9 +35,7 @@ export default {
       this.loading = false
     }
   },
-  mounted () {
-    this.load()
-  }
+  mounted () { this.load() }
 }
 </script>
 

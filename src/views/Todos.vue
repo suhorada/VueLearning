@@ -26,23 +26,14 @@ import Loader from '@/components/Loader.vue'
 import SelectList from '@/components/lists/SelectList.vue'
 import { mapGetters } from 'vuex'
 import { getLS } from '../localStorage'
+
 export default {
   name: 'App',
-  data () {
-    return {
-      loading: true
-    }
-  },
-  computed: {
-    ...mapGetters(['allTodos', 'currentList', 'todosSearch'])
-  },
-  components: {
-    TodoList, AddTodo, Loader, SelectList
-  },
+  data () { return { loading: true } },
+  computed: { ...mapGetters(['allTodos', 'currentList', 'todosSearch']) },
+  components: { TodoList, AddTodo, Loader, SelectList },
   methods: {
-    todoDelete (id) {
-      this.todos = this.todos.filter((el) => el.id !== id)
-    },
+    todoDelete (id) { this.todos = this.todos.filter((el) => el.id !== id) },
     load () {
       if (getLS('todos')) {
         this.$store.dispatch('getTodosFromLS')
@@ -50,9 +41,7 @@ export default {
       this.loading = false
     }
   },
-  mounted () {
-    this.load()
-  }
+  mounted () { this.load() }
 }
 </script>
 

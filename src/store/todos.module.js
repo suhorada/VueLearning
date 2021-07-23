@@ -7,21 +7,11 @@ export const state = {
 }
 
 export const actions = {
-  addTodo (context, todo) {
-    context.commit(ADD_TODO, todo)
-  },
-  deleteTodo (context, id) {
-    context.commit(DELETE_TODO, id)
-  },
-  editTodo (context, id) {
-    context.commit(EDIT_TODO, id)
-  },
-  getTodosFromLS (context) {
-    context.commit(LOAD_TODOS_LS)
-  },
-  setTodosSearch (context, text) {
-    context.commit(SET_TODOS_SEARCH, text)
-  }
+  addTodo (context, todo) { context.commit(ADD_TODO, todo) },
+  deleteTodo (context, id) { context.commit(DELETE_TODO, id) },
+  editTodo (context, id) { context.commit(EDIT_TODO, id) },
+  getTodosFromLS (context) { context.commit(LOAD_TODOS_LS) },
+  setTodosSearch (context, text) { context.commit(SET_TODOS_SEARCH, text) }
 }
 
 export const mutations = {
@@ -33,6 +23,7 @@ export const mutations = {
     }
     setLS('todos', state.todos)
   },
+
   [DELETE_TODO] (state, id) {
     if (state.todos) {
       state.todos = state.todos.filter((el) => el.id !== id)
@@ -41,6 +32,7 @@ export const mutations = {
     }
     setLS('todos', state.todos)
   },
+
   [DELETE_TODOS_IN_LIST] (state, list) {
     if (state.todos) {
       state.todos = state.todos.filter((el) => el.listName !== list)
@@ -70,6 +62,7 @@ export const mutations = {
     }
     setLS('todos', state.todos)
   },
+
   [LOAD_TODOS_LS] (state) {
     if (getLS('todos')) {
       state.todos = getLS('todos')
@@ -77,12 +70,11 @@ export const mutations = {
       state.todos = []
     }
   },
-  [SET_TODOS_SEARCH] (state, text) {
-    state.todosSearch = text
-  }
+  [SET_TODOS_SEARCH] (state, text) { state.todosSearch = text }
 }
 
 export const getters = {
+  todosSearch () { return state.todosSearch },
   allTodos () {
     let filtered = []
     filtered = state.todos.sort((el1, el2) => el1.id - el2.id).sort((el) => el.completed ? 1 : -1)
@@ -90,9 +82,6 @@ export const getters = {
       filtered = state.todos.filter((el) => el.text.indexOf(state.todosSearch, 0) !== -1)
     }
     return filtered
-  },
-  todosSearch () {
-    return state.todosSearch
   }
 }
 

@@ -11,10 +11,12 @@ export default new Router({
       path: '/',
       component: Home
     },
+
     {
       path: '/todos',
       component: () => import('@/views/Todos.vue')
     },
+
     {
       path: '/lists',
       component: () => import('@/views/Lists.vue')
