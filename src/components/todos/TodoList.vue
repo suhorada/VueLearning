@@ -1,5 +1,6 @@
 <template>
   <div>
+    <TodosSearch/>
     <ul>
       <TodoItem
         v-for="todo of filteredItems"
@@ -12,13 +13,14 @@
 
 <script>
 import TodoItem from '@/components/todos/TodoItem.vue'
+import TodosSearch from '@/components/todos/TodosSearch.vue'
 import { mapGetters } from 'vuex'
 import { getLS, removeLS } from '../../localStorage'
 
 export default {
   props: ['todos'],
   components: {
-    TodoItem
+    TodoItem, TodosSearch
   },
   methods: {
     getCurrentList() {

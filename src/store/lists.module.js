@@ -1,9 +1,10 @@
 import { getLS, setLS } from '../localStorage'
-import { ADD_LIST, DELETE_LIST, DELETE_TODOS_IN_LIST, EDIT_LIST, EDIT_TODOS_LIST, LOAD_LISTS_LS, SELECT_LIST } from './mutations.type'
+import { ADD_LIST, DELETE_LIST, DELETE_TODOS_IN_LIST, EDIT_LIST, EDIT_TODOS_LIST, LOAD_LISTS_LS, SELECT_LIST, SET_LISTS_SEARCH } from './mutations.type'
 
 export const state = {
   listNames: [],
-  selected: 'All'
+  selected: 'All',
+  listsSearch: ''
 }
 
 export const actions = {
@@ -23,6 +24,9 @@ export const actions = {
   editList (context, list) {
     context.commit(EDIT_LIST, list)
     context.commit(EDIT_TODOS_LIST, list)
+  },
+  setListsSearch (context, text) {
+    context.commit(SET_LISTS_SEARCH, text)
   }
 }
 
@@ -67,15 +71,26 @@ export const mutations = {
   [DELETE_LIST] (state, name) {
     state.listNames = state.listNames.filter((el) => el !== name)
     setLS('lists', state.listNames)
+  },
+  [SET_LISTS_SEARCH] (state, text) {
+    state.listsSearch = text
   }
 }
 
 export const getters = {
   allLists () {
-    return state.listNames
+    let filtered = []
+    filtered = state.listNames.sort((el1, el2) => el1.toLowerCase() > el2.toLowerCase())
+    if (state.listsSearch !== '') {
+      filtered = state.listNames.filter((el) => el.indexOf(state.listsSearch, 0) !== -1)
+    }
+    return filtered
   },
   currentList () {
     return state.selected
+  },
+  listsSearch () {
+    return state.listsSearch
   }
 }
 

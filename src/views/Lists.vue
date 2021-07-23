@@ -8,6 +8,7 @@
     <div class="add-bar">
       <SelectList/>
     </div>
+    Search: <ListSearch/>
     <Lists v-if="allLists.length"/>
     <p v-else>No lists</p>
   </div>
@@ -16,6 +17,7 @@
 <script>
 import Loader from '@/components/Loader.vue'
 import SelectList from '@/components/lists/SelectList.vue'
+import ListSearch from '@/components/lists/ListSearch.vue'
 import Lists from '@/components/lists/Lists.vue'
 import { mapGetters } from 'vuex'
 import { getLS } from '../localStorage'
@@ -30,7 +32,7 @@ export default {
     ...mapGetters(['allLists'])
   },
   components: {
-    Loader, SelectList, Lists
+    Loader, SelectList, Lists, ListSearch
   },
   methods: {
     load () {

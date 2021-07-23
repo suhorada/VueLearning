@@ -13,7 +13,7 @@
       <Loader v-if="loading"/>
       <TodoList
           v-bind:list="currentList"
-          v-else-if="allTodos.length"
+          v-else-if="allTodos.length || todosSearch"
       />
       <p v-else>No todods</p>
   </div>
@@ -34,7 +34,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['allTodos', 'currentList'])
+    ...mapGetters(['allTodos', 'currentList', 'todosSearch'])
   },
   components: {
     TodoList, AddTodo, Loader, SelectList

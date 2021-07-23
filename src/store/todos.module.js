@@ -1,7 +1,8 @@
 import { getLS, setLS } from '../localStorage'
-import { ADD_TODO, DELETE_TODO, DELETE_TODOS_IN_LIST, EDIT_TODO, EDIT_TODOS_LIST, LOAD_TODOS_LS } from './mutations.type'
+import { ADD_TODO, DELETE_TODO, DELETE_TODOS_IN_LIST, EDIT_TODO, EDIT_TODOS_LIST, LOAD_TODOS_LS, SET_TODOS_SEARCH } from './mutations.type'
 
 export const state = {
+  todosSearch: '',
   todos: []
 }
 
@@ -17,6 +18,9 @@ export const actions = {
   },
   getTodosFromLS (context) {
     context.commit(LOAD_TODOS_LS)
+  },
+  setTodosSearch (context, text) {
+    context.commit(SET_TODOS_SEARCH, text)
   }
 }
 
@@ -72,13 +76,23 @@ export const mutations = {
     } else {
       state.todos = []
     }
+  },
+  [SET_TODOS_SEARCH] (state, text) {
+    state.todosSearch = text
   }
 }
 
 export const getters = {
   allTodos () {
-    state.todos.sort((el) => el.completed ? 1 : -1)
-    return state.todos
+    let filtered = []
+    filtered = state.todos.sort((el1, el2) => el1.id - el2.id).sort((el) => el.completed ? 1 : -1)
+    if (state.todosSearch !== '') {
+      filtered = state.todos.filter((el) => el.text.indexOf(state.todosSearch, 0) !== -1)
+    }
+    return filtered
+  },
+  todosSearch () {
+    return state.todosSearch
   }
 }
 
