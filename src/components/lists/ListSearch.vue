@@ -7,7 +7,8 @@
 <script>
 export default {
   data() { return { text: '' } },
-  methods: { search() { this.$store.dispatch('setListsSearch', this.text) } }
+  methods: { search() { this.$store.dispatch('setListsSearch', this.text) } },
+  mounted() { this.$store.dispatch('setListsSearch', '') }
 }
 </script>
 

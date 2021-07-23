@@ -13,7 +13,8 @@ export default {
     search() {
       this.$store.dispatch('setTodosSearch', this.text)
     }
-  }
+  },
+  mounted() { this.$store.dispatch('setTodosSearch', '') }
 }
 </script>
 

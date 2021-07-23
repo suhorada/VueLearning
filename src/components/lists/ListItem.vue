@@ -3,9 +3,7 @@
     <span class="text-span">
         <div>
           <label @click="setList" class="list-label" v-if="!edit">
-            <router-link class="link" to="/todos">
-              {{list}}
-            </router-link>
+            <router-link class="link" to="/todos">{{list}}</router-link>
           </label>
         </div>
         <input class="list-input" v-on:keyup.enter="blurInput()" :value="list" ref="editInput" v-if="edit" v-on:blur="edit=!edit, editList('text')" type="text">
